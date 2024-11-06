@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { decodeCredential, GoogleLogin } from 'vue3-google-login'
 import type { CallbackTypes } from 'vue3-google-login'
-import { googleLogin } from '@/services/auth/google'
+import { loginWithGoogle } from '@/services/auth/google'
 import router from '@/router'
 
 type GoogleUserData = {
@@ -14,12 +14,11 @@ const callback: CallbackTypes.CredentialCallback = async response => {
   const userData: GoogleUserData = decodeCredential(
     response.credential,
   ) as GoogleUserData
-  googleLogin(userData.given_name, userData.email).then(function (resp) {
+  loginWithGoogle(userData.given_name, userData.email).then(function (resp) {
     if (resp.data.success) {
       console.log('Successfully logged in', resp.data.response)
       const localUser = {
         name: resp.data.response.name,
-        email: resp.data.response.email,
       }
       localStorage.setItem('userData', JSON.stringify(localUser))
       router.push({ path: 'home' })

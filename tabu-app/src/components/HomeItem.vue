@@ -5,12 +5,10 @@ import IconTabu from '@/components/icons/IconTabu.vue'
 
 type UserData = {
   name: string
-  email: string
 }
 
 let userData = ref<UserData>({
   name: '',
-  email: '',
 })
 onMounted(() => {
   let localStorageString = localStorage.getItem('userData') ?? ''

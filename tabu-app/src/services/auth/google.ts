@@ -1,11 +1,15 @@
 // the axios instance and types
 import http from '../api'
 
-async function googleLogin(name: string, email: string) {
+async function loginWithGoogle(name: string, email: string) {
   return await http({
-    url: 'api/oauth/login/google/callback',
+    url: 'api/user/check',
     method: 'POST',
-    headers: {},
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
     data: {
       isGoogleLogin: true,
       email: email,
@@ -14,4 +18,4 @@ async function googleLogin(name: string, email: string) {
   })
 }
 
-export { googleLogin }
+export { loginWithGoogle }
